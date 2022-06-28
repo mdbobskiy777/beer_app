@@ -40,22 +40,22 @@ const routes: RoutesType = [
   {
     path: '/',
     layout: MainLayout,
-    element: lazy(() => import('./pages/BeerCatalog')),
+    element: lazy(() => import('src/pages/BeerCatalogPage')),
   },
   {
     path: '/beerCatalog/',
     layout: MainLayout,
-    element: lazy(() => import('./pages/BeerCatalog')),
+    element: lazy(() => import('src/pages/BeerCatalogPage')),
   },
   {
     path: '/beerCatalog/:food',
     layout: MainLayout,
-    element: lazy(() => import('./pages/BeerCatalog')),
+    element: lazy(() => import('src/pages/BeerCatalogPage')),
   },
   {
     path: '/beerInfo/:beerName',
     layout: MainLayout,
-    element: lazy(() => import('./pages/BeerInfo')),
+    element: lazy(() => import('src/pages/BeerInfoPage')),
   },
   {
     path: '*',

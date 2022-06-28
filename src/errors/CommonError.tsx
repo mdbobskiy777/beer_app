@@ -1,1 +1,3 @@
-export const CommonError = () => <div>Something went wrong</div>;
+import Typography from '@mui/material/Typography';
+
+export const CommonError = () => <Typography>Something went wrong</Typography>;

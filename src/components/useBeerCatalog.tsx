@@ -2,7 +2,7 @@ import { createContext, ReactElement, useCallback, useContext, useMemo, useState
 
 import { getBeers } from '../utils/axios';
 
-type Beer = {
+export type Beer = {
   id: number;
   name: string;
   tagline: string;
@@ -67,7 +67,7 @@ type Beer = {
 
 export type BeerCatalog = Beer[];
 
-type GetBeerList = (food: string | undefined) => Promise<void>;
+type GetBeerList = (food: string | undefined, currentPage: number) => Promise<void>;
 
 type GetBeerInfoByName = (beerName: string | undefined) => Beer | undefined;
 type BeerContextType = {
@@ -85,10 +85,10 @@ type PropsType = {
 export const BeerCatalogProvider = ({ children }: PropsType) => {
   const [beerList, setBeerList] = useState<BeerCatalog | []>([]);
 
-  const getBeerList: GetBeerList = useCallback(async (food) => {
+  const getBeerList: GetBeerList = useCallback(async (food, currentPage) => {
     const updateRequest = food ? `&food=${food}` : '';
 
-    const data = await getBeers(1, 10, updateRequest).then((res) => res.data);
+    const data = await getBeers(currentPage, 30, updateRequest).then((res) => res.data);
     setBeerList(data);
   }, []);
 
