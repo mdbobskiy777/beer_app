@@ -1,4 +1,4 @@
-import { createContext, ReactElement, useContext, useMemo, useState } from 'react';
+import { createContext, ReactElement, useCallback, useContext, useMemo, useState } from 'react';
 
 import { getBeers } from '../utils/axios';
 
@@ -85,15 +85,17 @@ type PropsType = {
 export const BeerCatalogProvider = ({ children }: PropsType) => {
   const [beerList, setBeerList] = useState<BeerCatalog | []>([]);
 
-  const getBeerList: GetBeerList = async (food) => {
+  const getBeerList: GetBeerList = useCallback(async (food) => {
     const updateRequest = food ? `&food=${food}` : '';
 
     const data = await getBeers(1, 10, updateRequest).then((res) => res.data);
     setBeerList(data);
-  };
+  }, []);
 
-  const getBeerInfoByName: GetBeerInfoByName = (beerName) =>
-    beerList.find((beer) => beer.name === beerName);
+  const getBeerInfoByName: GetBeerInfoByName = useCallback(
+    (beerName) => beerList.find((beer) => beer.name === beerName),
+    [beerList]
+  );
 
   const value = useMemo(
     () => ({
