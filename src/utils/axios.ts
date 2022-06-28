@@ -1,8 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-
-/* type GeocodingData = { name: string; lat: number; lon: number; country: string };
-
-type GeogeocodingResponse = GeocodingData[]; */
+import { BeerCatalog } from '../components/useBeerCatalog';
 
 const baseAPIInstance: AxiosInstance = axios.create({
   baseURL: 'https://api.punkapi.com/v2/',
@@ -14,4 +11,4 @@ baseAPIInstance.interceptors.response.use(
 );
 
 export const getBeers = async (page: number, count: number, food: string) =>
-  baseAPIInstance.get(`beers?page=${page}&per_page=${count}${food}`);
+  baseAPIInstance.get<BeerCatalog>(`beers?page=${page}&per_page=${count}${food}`);
