@@ -2,22 +2,38 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 
+import { sortArray } from '../../helpers';
 import { BeerCard } from './BeerCard';
 import { useBeerCatalog } from '../useBeerCatalog';
+import { SortSelect } from './SortSelect';
 
 import styles from './styles';
 
 export const BeerCatalog = () => {
   const [currentPage, setCurrentPage] = useState(1);
-
   const navigate = useNavigate();
 
   const { food } = useParams();
 
   const { beerList, getBeerList } = useBeerCatalog();
+
+  const [sortedList, setSortedList] = useState(beerList);
+
+  const [sortBy, setSortBy] = useState('');
+
+  const handleChangeSort = useCallback((event: any) => {
+    setSortBy(event.target.value);
+  }, []);
+
+  useEffect(() => {
+    setSortedList(beerList);
+  }, [beerList]);
+
+  useEffect(() => {
+    setSortedList(sortArray(beerList, sortBy));
+  }, [sortBy]);
 
   useEffect(() => {
     getBeerList(food, currentPage);
@@ -37,9 +53,9 @@ export const BeerCatalog = () => {
 
   return (
     <Box sx={styles.mainContainer}>
-      {food && <Typography>{food}</Typography>}
+      <SortSelect sortBy={sortBy} handleChangeSort={handleChangeSort} />
       <Box sx={styles.listStyle}>
-        {beerList?.map((beer) => (
+        {sortedList?.map((beer) => (
           <BeerCard key={beer.id} onBeerCardClick={onBeerCardClick} beer={beer} />
         ))}
       </Box>

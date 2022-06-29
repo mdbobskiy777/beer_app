@@ -1,5 +1,6 @@
 export default {
   mainContainer: {
+    marginTop: '20px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -22,4 +23,6 @@ export default {
     transition: 'transform 0.3s',
     '&:hover': { transform: 'scale(1.1)' },
   },
+  sortSelectBox: { marginBottom: '20px' },
+  formControl: { width: '100px' },
 };

@@ -2,10 +2,10 @@ import Box from '@mui/material/Box';
 
 export const Loading = () => <div>Loading...</div>;
 
-type BeerImageBoxType = { url: string };
+type BeerImageBoxType = { url: string; height: string };
 
-export const BeerImageBox = ({ url }: BeerImageBoxType) => (
+export const BeerImageBox = ({ url, height }: BeerImageBoxType) => (
   <Box>
-    <img height="200px" src={url} alt="beer_icon" />
+    <img height={height} src={url} alt="beer_icon" />
   </Box>
 );

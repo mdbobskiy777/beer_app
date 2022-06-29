@@ -13,7 +13,7 @@ type BeerCardProps = {
 export const BeerCard = ({ onBeerCardClick, beer }: BeerCardProps) => {
   return (
     <Box onClick={onBeerCardClick(beer.name)} key={beer.id} sx={styles.listItemStyle}>
-      <BeerImageBox url={beer.image_url} />
+      <BeerImageBox url={beer.image_url} height="200px" />
       <Typography>{beer.name}</Typography>
       <Typography>{`abv: ${beer.abv}%`}</Typography>
     </Box>
